@@ -2,10 +2,9 @@ infinite_lambda_dbt:
   outputs:
     test-prod:
       job_execution_timeout_seconds: 300
-      execution_project: heroes-data-platform
-      project: heroes-analytics-prod
-      location: europe-west2
-      dataset: dbt_analytics_prod
+      execution_project: infinite-lambda
+      project: infinite-lambda
+      dataset: dbt_
       job_retries: 1
       threads: 4
       type: bigquery
@@ -15,10 +14,9 @@ infinite_lambda_dbt:
 
     test-dev:
       job_execution_timeout_seconds: 300
-      execution_project: heroes-data-platform
-      project: heroes-analytics-prod
-      location: europe-west2
-      dataset: dbt_analytics_dev
+      execution_project: infinite-lambda
+      project: infinite-lambda
+      dataset: dbt_
       job_retries: 1
       threads: 4
       type: bigquery
