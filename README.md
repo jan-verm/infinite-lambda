@@ -86,17 +86,9 @@ The project uses a **dimensional modeling approach** with clear separation betwe
 Purpose:
 
 - Clean raw source data
-- Standardize column names
 - Cast data types
 - Remove source inconsistencies
 
-Example:
-
-
-raw_orders
-|
-v
-stg_orders
 
 ### Intermediate Layer
 
@@ -106,15 +98,6 @@ Purpose:
 - Perform complex joins
 - Prepare datasets for final marts
 
-Example:
-
-
-stg_orders
-+
-stg_customers
-|
-v
-int_customer_orders
 
 ### Mart Layer
 
@@ -122,9 +105,3 @@ Purpose:
 
 Create analytics-ready models consumed by BI tools.
 
-Examples:
-
-
-dim_customer
-dim_product
-fct_sales
