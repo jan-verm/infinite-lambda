@@ -54,7 +54,5 @@ select
   pharma, 
   mo, 
   cip, 
-  sales,
-  AVG(sales) OVER(PARTITION BY pharma, cip ORDER BY mo asc ROWS BETWEEN 12 PRECEDING AND 1 PRECEDING) AS sales_avg_12m,
-  AVG(sales) OVER(PARTITION BY pharma, cip ORDER BY mo asc ROWS BETWEEN 24 PRECEDING AND 1 PRECEDING) AS sales_avg_24m
+  sales
 from sales_kv

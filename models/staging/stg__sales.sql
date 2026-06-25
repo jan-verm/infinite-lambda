@@ -17,7 +17,14 @@ latest_ingestion as (
   group by p_pharmacy
 )
 
-select rot.* 
+select 
+  rot.p_pharmacy
+  , cip
+  , lastmonth
+  {% for i in range(1, 31) %}
+  , cast(v{{ i }} as int64) as v{{ i }}
+  {% endfor %}
+  , rot.p_ingestion_dt
 from latest_ingestion li
 inner join demo_raw_data rot 
 on rot.p_pharmacy = li.p_pharmacy and rot.p_ingestion_dt = li.p_ingestion_dt

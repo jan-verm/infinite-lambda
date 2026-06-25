@@ -2,7 +2,32 @@
 version: 2
 
 models:
-    - name: consolidation_monthly
-      description: "Monthly consolidation of sales and supply"
-    - name: rotation_monthly
+    - name: stock_rotation_monthly
       description: "Monthly rotation per product"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - pharma
+              - cip
+    - name: product_info
+      description: "Product information and identifiers"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - pharma
+              - cip
+    - name: sales_monthly
+      description: "Monthly sales per product for each pharmacy"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - pharma
+              - cip
+              - mo
+    - name: stock_levels
+      description: "Current stock level per product"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - pharma
+              - cip

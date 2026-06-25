@@ -30,11 +30,6 @@ deduped_products as (
 select 
   p_pharmacy,
   cip,
-  ean13,
-  code_rembt,
-  nom,
-  prix_public,
-  moyenprixaht,
   en_stock,
   p_ingestion_dt
 from deduped_products
