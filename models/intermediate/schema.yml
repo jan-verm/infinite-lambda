@@ -1,0 +1,6 @@
+
+version: 2
+
+models:
+    - name: int__rotation_month_numbering
+      description: "Translation for bespoke month numbering"

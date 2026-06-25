@@ -1,0 +1,8 @@
+
+version: 2
+
+models:
+    - name: consolidation_monthly
+      description: "Monthly consolidation of sales and supply"
+    - name: rotation_monthly
+      description: "Monthly rotation per product"
