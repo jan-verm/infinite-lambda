@@ -1,0 +1,27 @@
+heroes_dbt_analytics:
+  outputs:
+    test-prod:
+      job_execution_timeout_seconds: 300
+      execution_project: heroes-data-platform
+      project: heroes-analytics-prod
+      location: europe-west2
+      dataset: dbt_analytics_prod
+      job_retries: 1
+      threads: 4
+      type: bigquery
+      method: service-account
+      priority: interactive
+      keyfile: ./creds.json # THIS FILE WILL BE GENERATED USING SECRETS DURING BUILD TIME
+
+    test-dev:
+      job_execution_timeout_seconds: 300
+      execution_project: heroes-data-platform
+      project: heroes-analytics-prod
+      location: europe-west2
+      dataset: dbt_analytics_dev
+      job_retries: 1
+      threads: 4
+      type: bigquery
+      method: service-account
+      priority: interactive
+      keyfile: ./creds.json # THIS FILE WILL BE GENERATED USING SECRETS DURING BUILD TIME

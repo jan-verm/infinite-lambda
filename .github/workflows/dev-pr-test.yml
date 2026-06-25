@@ -1,0 +1,45 @@
+name: "[DEV] PR Changes Test"
+
+on:
+  pull_request:
+    branches:
+     - develop
+
+env:
+  CURRENT_MANIFEST_PATH: 's3://${{ secrets.DEV_AIRFLOW_CONFIG_AWS_S3_BUCKET }}/ecs/dags/dbt_projects/dbt-analytics/test/manifest.json'
+  SYNC_PARAMS: --delete --exclude 'dags/*' --exclude 'uncommitted/*'  --exclude 'terraform/*' --exclude '.*' --exclude "test/*"
+  DEST_DIR: ecs/dags/dbt_projects/dbt-analytics/
+
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_DE_AWS_SECRET_ACCESS_KEY }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.DEV_DE_AWS_ACCESS_KEY_ID }}
+  ENVIRONMENT: dev
+
+jobs:
+  test:
+    name: "[DEV] Test Modified Models"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: '[CLONE] Clone dbt repository'
+        uses: actions/checkout@v3
+
+      - name: '[DEV] dbt dependencies'
+        uses: mwhitaker/dbt-action@v1.4.6
+        with:
+          dbt_command: "dbt deps"
+        env:
+          DBT_BIGQUERY_TOKEN: ${{ secrets.DBT_BIGQUERY_TOKEN }}
+
+      - name: '[DEV] dbt seed'
+        uses: mwhitaker/dbt-action@v1.4.6
+        with:
+          dbt_command: "dbt seed --profiles-dir ./.github/configs --target test-dev"
+        env:
+          DBT_BIGQUERY_TOKEN: ${{ secrets.DBT_BIGQUERY_TOKEN }}
+
+      - name: '[DEV] Run modified models - full refresh'
+        uses: mwhitaker/dbt-action@v1.4.6
+        with:
+          dbt_command: "dbt build --full-refresh --profiles-dir ./.github/configs --target test-dev"
+        env:
+          DBT_BIGQUERY_TOKEN: ${{ secrets.DBT_BIGQUERY_TOKEN }}
