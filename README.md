@@ -103,5 +103,5 @@ Purpose:
 
 Purpose:
 
-Create analytics-ready models consumed by BI tools.
+- Create analytics-ready models consumed by BI tools.
 
