@@ -1,4 +1,4 @@
-heroes_dbt_analytics:
+infinite_lambda_dbt:
   outputs:
     test-prod:
       job_execution_timeout_seconds: 300
