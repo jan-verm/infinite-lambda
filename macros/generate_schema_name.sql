@@ -1,0 +1,5 @@
+{% if custom_schema_name is none %}
+    {{ target.schema }}
+{% else %}
+    {{ target.schema }}_{{ custom_schema_name }}
+{% endif %}

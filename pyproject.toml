@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "dbt-analytics"
+version = "0.1.0"
+description = "Analytics dbt project."
+authors = ["Jan Vermeulen <jvermeulen@lespharmaciesguyanaises.org>"]
+
+[tool.poetry.dependencies]
+python = "~3.10"
+dbt-core = "1.4.7"
+dbt-bigquery = "1.4.4"
+elementary-data = {extras = ["bigquery"], version = "0.13.1"}
+numpy = "1.25.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.0.4"
+sqlfluff = "3.0.7"
+sqlfluff-templater-dbt = "3.0.7"
+jupyter = "^1.0.0"
+pandas = "^1.5.3"
+openpyxl = "^3.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
