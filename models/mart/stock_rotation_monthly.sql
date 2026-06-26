@@ -15,6 +15,7 @@ with sales_rolling_avg as (
   select pharma, cip, sales_avg_6m
   from sales_rolling_avg
   where mo = DATETIME(FORMAT_DATETIME('%Y-%m-01', CURRENT_DATETIME()))
+  and sales_avg_6m > 0
 )
 
 , stocks as (
@@ -23,6 +24,7 @@ with sales_rolling_avg as (
   cip, 
   en_stock as stocks
   from {{ ref('stg__stock_levels') }}
+  where en_stock > 0
 )
 
 , prod_meta as (
