@@ -2,7 +2,7 @@
 version: 2
 
 models:
-    - name: int__rotation_month_numbering
+    - name: int__sales_month_numbering
       description: "Translation for bespoke month numbering"
     - name: int__sales_rolling_avg
       description: "Trailing 6-month rolling average of sales per pharmacy/product/month"
