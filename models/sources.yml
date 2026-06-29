@@ -2,6 +2,9 @@ version: 2
 
 sources:
   - name: raw
+    loaded_at_field: timestamp(p_ingestion_dt)
+    freshness:
+      warn_after: {count: 3, period: day}
     tables:
       - name: stprod
         database: raw
