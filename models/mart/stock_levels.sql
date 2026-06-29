@@ -6,8 +6,7 @@
 }}
 
 select 
-  p_pharmacy as pharma,
+  pharma,
   cip,
-  en_stock as stock_level,
-  p_ingestion_dt
-from {{ ref('stg__stock_levels') }}
+  stocks
+from {{ ref('int__stock_on_hand') }}
