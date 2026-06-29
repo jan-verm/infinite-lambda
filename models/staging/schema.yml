@@ -1,0 +1,52 @@
+
+version: 2
+
+models:
+    - name: stg__sales
+      description: "Latest monthly sales snapshot per pharmacy/product, wide-format (v1-v30)"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - p_pharmacy
+              - cip
+      columns:
+        - name: p_pharmacy
+          description: "Pharmacy identifier"
+          tests:
+            - not_null
+        - name: cip
+          description: "Product identifier (CIP code)"
+          tests:
+            - not_null
+    - name: stg__product_info
+      description: "Deduplicated product reference data, latest record per pharmacy/product"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - p_pharmacy
+              - cip
+      columns:
+        - name: p_pharmacy
+          description: "Pharmacy identifier"
+          tests:
+            - not_null
+        - name: cip
+          description: "Product identifier (CIP code)"
+          tests:
+            - not_null
+    - name: stg__stock_levels
+      description: "Deduplicated stock-on-hand data, latest record per pharmacy/product"
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - p_pharmacy
+              - cip
+      columns:
+        - name: p_pharmacy
+          description: "Pharmacy identifier"
+          tests:
+            - not_null
+        - name: cip
+          description: "Product identifier (CIP code)"
+          tests:
+            - not_null
