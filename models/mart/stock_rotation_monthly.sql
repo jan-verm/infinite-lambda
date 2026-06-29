@@ -5,26 +5,16 @@
     ) 
 }}
 
-with sales_rolling_avg as (
-  select pharma, cip, mo,
-  AVG(sales) OVER(PARTITION BY pharma, cip ORDER BY mo asc ROWS BETWEEN 6 PRECEDING AND 1 PRECEDING) AS sales_avg_6m
-  from {{ ref('sales_monthly') }}
-)
-
-, latest_sales as (
+with latest_sales as (
   select pharma, cip, sales_avg_6m
-  from sales_rolling_avg
+  from {{ ref('int__sales_rolling_avg') }}
   where mo = DATETIME(FORMAT_DATETIME('%Y-%m-01', CURRENT_DATETIME()))
   and sales_avg_6m > 0
 )
 
 , stocks as (
-  select 
-  p_pharmacy as pharma,
-  cip, 
-  en_stock as stocks
-  from {{ ref('stg__stock_levels') }}
-  where en_stock > 0
+  select pharma, cip, stocks
+  from {{ ref('int__stock_on_hand') }}
 )
 
 , prod_meta as (
@@ -58,7 +48,7 @@ select
   pm.name,
   c.stocks,
   c.sales,
-  c.sales/c.stocks as runway,
+  c.stocks/c.sales as runway,
   pm.weighted_avg_cost,
   pm.selling_price,
   pm.reimbursement_label
