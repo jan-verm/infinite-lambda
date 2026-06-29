@@ -10,4 +10,4 @@ select
   cip,
   mo,
   AVG(sales) OVER(PARTITION BY pharma, cip ORDER BY mo asc ROWS BETWEEN 6 PRECEDING AND 1 PRECEDING) AS sales_avg_6m
-from {{ ref('sales_monthly') }}
+from {{ ref('int__sales_monthly') }}

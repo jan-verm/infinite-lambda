@@ -21,9 +21,7 @@ select
   rot.p_pharmacy
   , cip
   , lastmonth
-  {% for i in range(1, 31) %}
-  , cast(v{{ i }} as int64) as v{{ i }}
-  {% endfor %}
+  {{ cast_sales_columns() }}
   , rot.p_ingestion_dt
 from latest_ingestion li
 inner join demo_raw_data rot 

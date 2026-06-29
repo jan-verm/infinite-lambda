@@ -4,6 +4,8 @@ version: 2
 models:
     - name: int__sales_month_numbering
       description: "Translation for bespoke month numbering"
+    - name: int__sales_monthly
+      description: "Monthly sales per product for each pharmacy"
     - name: int__sales_rolling_avg
       description: "Trailing 6-month rolling average of sales per pharmacy/product/month"
     - name: int__stock_on_hand
